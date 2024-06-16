@@ -29,6 +29,8 @@ class App:
             if event.type == pygame.VIDEORESIZE:
                 # Mantendo Proporção de 16:9
                 display = pygame.display.set_mode((event.size[0], event.size[0] / 1.77), pygame.RESIZABLE)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                game.click(event.pos)
 
 
 app = App()
