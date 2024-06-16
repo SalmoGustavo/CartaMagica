@@ -7,6 +7,7 @@ card_size_x = cards_sheet.get_size()[0] / 13
 card_size_y = cards_sheet.get_size()[1] / 4
 
 cards_images = []
+card_back = pygame.image.load('assets/images/card_back.png')
 
 for y in range(4):
     for x in range(13):
@@ -18,19 +19,23 @@ class Card:
         self.type = card_type
         self.pos = pos
         self.size = size
-        self.visible = True
+        self.visivel = True
 
     def draw(self, pos):
-        if self.visible:
-            space_x = 50
+        space_x = 50
 
-            pos_x = pos[0] + (self.pos[0] * self.size[0])
-            pos_y = pos[1] + (self.pos[1] * (self.size[0] / 2))
+        pos_x = pos[0] + (self.pos[0] * self.size[0])
+        pos_y = pos[1] + (self.pos[1] * (self.size[0] / 2))
 
-            if self.pos[0] == 1:
-                pos_x += space_x
-            if self.pos[0] == 2:
-                pos_x += (space_x * 2)
+        if self.pos[0] == 1:
+            pos_x += space_x
+        if self.pos[0] == 2:
+            pos_x += (space_x * 2)
 
+        if self.visivel:
             screen.blit(cards_images[self.type], (pos_x, pos_y))
+        else:
+            screen.blit(card_back, (pos_x, pos_y))
 
+    def virar(self):
+        self.visivel = not self.visivel

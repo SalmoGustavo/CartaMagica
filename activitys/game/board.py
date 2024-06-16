@@ -16,13 +16,14 @@ class Board:
             line = []
             for y in range(7):
                 ok = False
-                while not ok:
+                while ok is False:
                     number = randint(0, 51)
                     if number not in choiceds:
                         card_item = card.Card(randint(0, 51), [x, y])
+                        choiceds.append(number)
                         ok = True
-                line.append(card_item)
 
+                line.append(card_item)
             self.cards.append(line)
 
     def distribute(self, no_centro):
@@ -42,8 +43,14 @@ class Board:
         if no_centro == 3:
             ordem_distribuicao = [coluna2, coluna3, coluna1]
 
+        ocultar = False
+
         for coluna in ordem_distribuicao:
             for carta in coluna:
+                if ocultar:
+                    if carta.pos[0] != no_centro - 1 and carta.visivel is True:
+                        carta.virar()
+
                 carta.pos[0] = index_coluna
                 carta.pos[1] = len(novo_posicionamento[index_coluna])
 
